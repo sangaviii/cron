@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+        <record id="email_template_anniversary_mail" model="mail.template">
+            <field name="name">Invite: Anniversary Mail</field>
+            <field name="model_id" ref="function.model_celebration_event"/>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="email_to">{{ (object.email and '"%s" %s' % (object.name, object.email))  }}</field>
+            <field name="subject">Anniversary Mail {{ object.name}})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear
+                        <t t-if="object.name">
+                            <t t-out="object.name or ''"/>
+                        </t>
+                        <br /><br />
+                        <t t-if="object.event_date">
+                             poo da vennamavane <strong t-out="object.event_date or ''"></strong>
+                        </t>
+                    </p>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+    </data>
+</odoo>
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data>-->
+
+<!--        <record id="mail_template_anniversary" model="mail.template">-->
+<!--            <field name="name">Anniversary Event</field>-->
+<!--            <field name="model_id" ref="model_event_event"/>-->
+<!--            <field name="subject">Event Reminder</field>-->
+<!--            <field name="email_from">your_email@example.com</field>-->
+<!--            <field name="email_to">${object.attendee_ids.mapped('email')}</field>-->
+<!--            <field name="body_html">-->
+<!--                <![CDATA[-->
+<!--                    &lt;!&ndash; Your HTML content goes here &ndash;&gt;-->
+<!--                    <p>Hello ${object.attendee_ids.mapped('partner_id.name')},</p>-->
+<!--                    <p>This is a reminder for the upcoming event: ${object.name}.</p>-->
+<!--                    <p>Date: ${object.start_datetime}</p>-->
+<!--                    &lt;!&ndash; Add more content as needed &ndash;&gt;-->
+<!--                ]]>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--    </data>-->
+<!--</odoo>-->
